@@ -653,6 +653,11 @@ Planned
   to allow application code to e.g. log more detailed version information
   relevant for non-official snapshot builds
 
+* Add DUK_OPT_UNDERSCORE_SETJMP and DUK_OPT_SIGSETJMP to use alternative
+  providers for long control transfer; _setjmp() or sigsetjmp() (with savesigs
+  set to 0) can be a lot faster than setjmp() if the platform's setjmp()
+  implementation saves the signal mask (GH-55)
+
 * Fix compile error for DUK_OPT_NO_PC2LINE
 
 * Better fix for C++ compilation issue caused by Duktape using both
