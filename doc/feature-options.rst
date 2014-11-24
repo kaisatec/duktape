@@ -134,6 +134,24 @@ Errors in the initialization code result in a fatal error.
 which provides much more flexibility for extending the global environment,
 implementing sandboxing, etc.)
 
+DUK_OPT_UNDERSCORE_SETJMP
+-------------------------
+
+Use ``_setjmp/_longjmp`` instead of ``setjmp/longjmp``.  This ensures signal
+mask is not saved which can be a lot faster if ``setjmp/longjmp`` saves the
+signal mask (this varies between platforms).
+
+``setjmp/longjmp`` is the default provider for long control transfer because
+it is the most portable.  Unfortunately its behavior varies a bit across
+platforms, especially with respect to saving the signal mask.
+
+DUK_OPT_SIGSETJMP
+-----------------
+
+Use ``sigsetjmp/siglongjmp`` with ``savesigs == 0`` (i.e. signal mask not
+saved/restored) instead of ``setjmp/longjmp``.  See comments in
+``DUK_OPT_UNDERSCORE_SETJMP``.
+
 Memory management options
 =========================
 
